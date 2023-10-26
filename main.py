@@ -5,8 +5,6 @@ import keyboard
 from PIL import Image, ImageGrab
 from pynput.mouse import Button, Controller
 
-waitTime = 0.0069
-
 def log(text):
     timestamp = datetime.datetime.utcfromtimestamp(time.time()).strftime("%H:%M:%S")
     print(f"[{timestamp}] {text}")
@@ -16,13 +14,13 @@ def click_and_move(x, y, color, mouse):
         tx, ty = x - 940, y - 560
         log(f"{tx}, {ty}")
         win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, tx, ty, 0, 0)
-        time.sleep(waitTime)
+        time.sleep(0.007)
         mouse.click(Button.left)
-        time.sleep(waitTime)
-        txx, tyx = tx * (-1), ty * (-1)
+        time.sleep(0.007)
         #log(f"Restarting postion ({txx}, {tyx})")
-        win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, txx, tyx, 0, 0)
-        time.sleep(waitTime)
+        win32api.mouse_event(win32con.MOUSEEVENTF_MOVE, -tx, -ty, 0, 0)
+        time.sleep(0.0013)
+
 
 def main():
     print("Press Q to stop the program")
